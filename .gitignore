@@ -1,0 +1,4 @@
+.gradle/
+**/caches/
+**/logs/
+**/build/
