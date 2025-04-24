@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GlowUp - Customer Home</title>
+  <link rel="stylesheet" href="css/customer.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+<header class="main-header">
+  <div class="container">
+    <div class="logo">
+      <h1>GlowUp</h1>
+    </div>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#find">Find a Salon</a></li>
+        <li><a href="#book">Book Appointment</a></li>
+        <li><a href="#enjoy">Enjoy Service</a></li>
+      </ul>
+    </nav>
+    <div class="auth-buttons">
+      <div class="user-menu">
+        <button class="user-avatar">
+          <img src="images/default-avatar.jpg" alt="User">
+        </button>
+        <div class="dropdown-menu">
+          <a href="dashboard.html">My Appointments</a>
+          <a href="profile.html">Profile</a>
+          <a href="#" id="logout">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h2>Welcome Back!</h2>
+        <p>Find your ideal salon, book an appointment, and enjoy top-tier service.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="find" class="find-salon">
+    <div class="container">
+      <h2>1. Find a Salon</h2>
+      <p>Browse our list of available salons and barbershops:</p>
+      <div class="salon-grid">
+        <div class="salon-card">
+          <h3>Luxury Hair Studio</h3>
+          <p>Location: Downtown</p>
+          <p>Services: Hair, Nails, Spa</p>
+          <a href="#" class="btn btn-outline view-details" data-salon="luxury-hair-studio.html">View Details</a>
+        </div>
+        <div class="salon-card">
+          <h3>Urban Nails Lounge</h3>
+          <p>Location: Westside</p>
+          <p>Services: Nails, Waxing</p>
+          <a href="#" class="btn btn-outline view-details" data-salon="urban-nails.html">View Details</a>
+        </div>
+        <div class="salon-card">
+          <h3>Gentleman's Barbershop</h3>
+          <p>Location: East District</p>
+          <p>Services: Haircuts, Shaves</p>
+          <a href="#" class="btn btn-outline view-details" data-salon="gentlemans-barbershop.html">View Details</a>
+        </div>
+      </div>
+      </div>
+  </section>
+
+  <section id="book" class="book-appointment">
+    <div class="container">
+      <h2>2. Book an Appointment</h2>
+      <p>Select your preferred salon/barbershop, choose a service, and book a date and time:</p>
+      <form class="booking-form">
+        <label for="salonSelect">Select Salon:</label>
+        <select id="salonSelect">
+          <option>Luxury Hair Studio</option>
+          <option>Urban Nails Lounge</option>
+          <option>Gentleman's Barbershop</option>
+        </select>
+
+        <label for="serviceSelect">Select Service:</label>
+        <select id="serviceSelect">
+          <option>Haircut</option>
+          <option>Hair Styling</option>
+          <option>Nail Treatment</option>
+        </select>
+
+        <label for="appointmentDate">Select Date:</label>
+        <input type="date" id="appointmentDate">
+
+        <label for="appointmentTime">Select Time:</label>
+        <input type="time" id="appointmentTime">
+
+        <button type="submit" class="btn btn-primary">Request Appointment</button>
+      </form>
+      <p class="note">*Appointment will be confirmed or declined by the salon based on staff availability.</p>
+    </div>
+  </section>
+
+  <section id="enjoy" class="enjoy-service">
+    <div class="container">
+      <h2>3. Enjoy Your Service</h2>
+      <p>Relax and enjoy top-quality beauty services from trusted professionals.</p>
+      <img src="images/enjoy-service.jpg" alt="Enjoy Service" class="enjoy-img">
+    </div>
+  </section>
+</main>
+
+<footer class="main-footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>GlowUp</h3>
+        <p>Your trusted platform for salon and beauty appointments.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#find">Find a Salon</a></li>
+          <li><a href="#book">Book Appointment</a></li>
+          <li><a href="#enjoy">Enjoy Service</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Contact</h3>
+        <ul>
+          <li><i class="fas fa-envelope"></i> support@glowup.com</li>
+          <li><i class="fas fa-phone"></i> +1 (555) 987-6543</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 GlowUp. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
