@@ -6,21 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-<<<<<<< HEAD
-        <module name="GlowUp-WebApp" />
-=======
         <module name="glowup-booking" />
->>>>>>> 485225a (Removed nested .git repo and added full project structure)
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-<<<<<<< HEAD
-      <module name="GlowUp-WebApp" options="-parameters -Xlint:all -Xlint:-serial" />
-=======
       <module name="glowup-booking" options="-parameters -Xlint:all -Xlint:-serial" />
->>>>>>> 485225a (Removed nested .git repo and added full project structure)
     </option>
   </component>
 </project>

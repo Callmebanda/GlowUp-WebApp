@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirm Your Booking</title>
+    <style>
+        :root {
+            --primary-color: #ff6b6b; /* Red-pink */
+            --secondary-color: #2575fc; /* Blue */
+            --accent-color: #6a11cb; /* Purple */
+            --highlight-color: #ffb6b6; /* Light pink */
+            --light-background: #f5f7fa; /* Light background */
+            --dark-background: #222222; /* Dark background */
+            --white: #ffffff; /* Pure white */
+            --text-color: #222222; /* Dark gray for text */
+            --light-text: #777777; /* Lighter gray for secondary text */
+            --border-color: #e0e0e0; /* Light gray border */
+            --black: #000000; /* Black */
+        }
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            background: var(--background-light);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 25px;
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        main {
+            flex: 1;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .booking-details {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            padding: 30px 25px;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+            color: white;
+        }
+
+        .booking-details h2 {
+            margin-bottom: 20px;
+            font-size: 26px;
+        }
+
+        .booking-details p {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        form {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        input[type="date"],
+        input[type="time"] {
+            padding: 12px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            background: white;
+            color: var(--text-color);
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        input[type="date"]:focus,
+        input[type="time"]:focus {
+            border: 2px solid var(--accent-color);
+        }
+
+        button {
+            padding: 12px;
+            font-size: 16px;
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        button:hover {
+            background: var(--accent-color);
+            transform: scale(1.05);
+        }
+
+        .note {
+            margin-top: 15px;
+            font-size: 13px;
+            color: #f0f0f0;
+        }
+
+        footer {
+            margin-top: auto;
+            background: var(--black);
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    Confirm Your Booking ✨
+</header>
+
+<main>
+    <div class="booking-details">
+        <h2>Your Selected Service</h2>
+        <p><strong>Salon:</strong> <span id="salon-name"></span></p>
+        <p><strong>Service:</strong> <span id="service-name"></span></p>
+        <p><strong>Price:</strong> <span id="service-price"></span></p>
+
+        <form id="booking-form">
+            <div>
+                <label for="appointment-date">Select Date:</label>
+                <input type="date" id="appointment-date" required>
+            </div>
+
+            <div>
+                <label for="appointment-time">Select Time:</label>
+                <input type="time" id="appointment-time" required>
+            </div>
+
+            <button type="submit">Confirm Booking</button>
+
+            <p class="note">*Appointment will be confirmed by the salon based on staff availability.</p>
+        </form>
+    </div>
+</main>
+
+<footer>
+    &copy; 2025 GlowUp WebApp. All Rights Reserved.
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const salonName = localStorage.getItem('selectedSalon') || 'Unknown Salon';
+        const serviceName = localStorage.getItem('selectedService') || 'Unknown Service';
+        const servicePrice = localStorage.getItem('selectedPrice') || 'Price not available';
+
+        document.getElementById('salon-name').textContent = salonName;
+        document.getElementById('service-name').textContent = serviceName;
+        document.getElementById('service-price').textContent = servicePrice;
+
+        const bookingForm = document.getElementById('booking-form');
+        bookingForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const selectedDate = document.getElementById('appointment-date').value;
+            const selectedTime = document.getElementById('appointment-time').value;
+
+            if (selectedDate && selectedTime) {
+                alert(`Booking confirmed!\n\nSalon: ${salonName}\nService: ${serviceName}\nPrice: ${servicePrice}\nDate: ${selectedDate}\nTime: ${selectedTime}`);
+
+                // Redirect to customer dashboard after booking
+                window.location.href = 'customer-dashboard.html';  // Replace with the actual path to the customer dashboard page
+            } else {
+                alert('Please select both date and time.');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
+
