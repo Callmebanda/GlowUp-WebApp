@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About Us - GlowUp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+        <style>
+         :root {
+             --primary-color: #7e00ff;
+             --secondary-color: #5600c2;
+             --accent-color: #5f00c7;
+             --highlight-color: #9f63ff;
+             --light-background: #ffffff;
+             --dark-background: #000000;
+             --white: #ffffff;
+             --black: #000000;
+             --text-color: #000000;
+         }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--light-background);
+            color: var(--text-color);
+        }
+
+        nav {
+            background: var(--white);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        #logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--black);
+            font-weight: 500;
+            font-size: 16px;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: var(--primary-color);
+        }
+
+        .auth-buttons {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 999px;
+            font-size: 13px;
+        }
+
+        .auth-buttons a {
+            color: white;
+            text-decoration: none;
+        }
+
+        header.hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: var(--white);
+            text-align: center;
+            padding: 80px 30px;
+        }
+
+        header.hero h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        header.hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        section.about-content {
+            padding: 60px 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+
+        .about-row.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h2 {
+            font-size: 32px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .about-text p {
+            font-size: 16px;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .about-img {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-img img {
+            width: 100%;
+            max-width: 320px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+
+
+        .mission-section {
+            background: var(--accent-color);
+            color: var(--white);
+            padding: 60px 30px;
+            text-align: center;
+        }
+
+        .mission-section h2 {
+            font-size: 34px;
+            margin-bottom: 20px;
+        }
+
+        .mission-section p {
+            font-size: 18px;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .footer {
+            background-color: #1e1e1e;
+            color: #fff;
+            padding: 40px 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-section {
+            flex: 1 1 300px;
+            margin: 10px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .footer-section p,
+        .footer-section li,
+        .footer-section a {
+            font-size: 14px;
+            color: #ccc;
+            line-height: 1.6;
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            color: #a855f7; /* Purple hover */
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section li {
+            margin-bottom: 8px;
+        }
+
+        .footer-section i {
+            margin-right: 8px;
+        }
+
+        .footer hr {
+            border: none;
+            border-top: 1px solid #444;
+            margin: 30px 0;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            color: #ccc;
+            font-size: 14px;
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+    <div id="logo">GlowUp</div>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="Salon%20Listing.html">Salons</a></li>
+        <li><a href="Services.html">Services</a></li>
+        <li><a href="About.html" class="active">About</a></li>
+    </ul>
+    <div class="auth-buttons">
+        Welcome! <a href="login.html">Sign In</a> or <a href="register.html">Join Free</a>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<header class="hero">
+    <h1>About GlowUp</h1>
+    <p>We're on a mission to make beauty effortless — connecting you with trusted salons and stylists across your city.</p>
+</header>
+
+<!-- About Content -->
+<section class="about-content">
+    <div class="about-row">
+        <div class="about-text">
+            <h2>Who We Are</h2>
+            <p>GlowUp is more than just a booking platform — it's your personal gateway to top-tier beauty experiences. Whether you're looking for a quick trim or a full makeover, we help you find the best professionals at your fingertips.</p>
+        </div>
+        <div class="about-img">
+            <img src="../../images/who.jpeg"/>
+        </div>
+    </div>
+
+    <div class="about-row reverse">
+        <div class="about-text">
+            <h2>Our Values</h2>
+            <p>We believe in empowerment, excellence, and elegance. By blending cutting-edge tech with genuine care, we strive to create a platform that uplifts beauty professionals and clients alike. Quality, convenience, and connection — that’s what GlowUp delivers.</p>
+        </div>
+        <div class="about-img">
+            <img src="../../images/values.jpeg"/>
+        </div>
+    </div>
+</section>
+
+<!-- Mission Section -->
+<section class="mission-section">
+    <h2>Our Mission</h2>
+    <p>To revolutionize the way beauty is booked, experienced, and celebrated. GlowUp aims to be the trusted companion for anyone seeking confidence, convenience, and care — one appointment at a time.</p>
+</section>
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>GlowUp</h3>
+            <p>Your premier salon booking platform connecting customers with the best beauty professionals.</p>
+        </div>
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="Salon%20Listing.html">Salons</a></li>
+                <li><a href="Services.html">Services</a></li>
+                <li><a href="About.html">About Us</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Contact</h3>
+            <p><i class="fas fa-envelope"></i> info@glowup.com</p>
+            <p><i class="fas fa-phone-alt"></i> +1 (555) 123-4567</p>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Beauty St, Glamour City</p>
+        </div>
+    </div>
+    <hr>
+    <div class="footer-bottom">
+        <p>© 2023 GlowUp. All rights reserved.</p>
+        <div class="social-icons">
+            <i class="fab fa-facebook-f"></i>
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-twitter"></i>
+        </div>
+    </div>
+</footer>
+
+<!-- Font Awesome CDN for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+
+</body>
+</html>
+

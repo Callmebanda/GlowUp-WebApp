@@ -5,19 +5,18 @@
     <title>Confirm Your Booking</title>
     <style>
         :root {
-            --primary-color: #ff6b6b; /* Red-pink */
-            --secondary-color: #2575fc; /* Blue */
-            --accent-color: #6a11cb; /* Purple */
-            --highlight-color: #ffb6b6; /* Light pink */
-            --light-background: #f5f7fa; /* Light background */
-            --dark-background: #222222; /* Dark background */
-            --white: #ffffff; /* Pure white */
-            --text-color: #222222; /* Dark gray for text */
-            --light-text: #777777; /* Lighter gray for secondary text */
-            --border-color: #e0e0e0; /* Light gray border */
-            --black: #000000; /* Black */
+            --primary-color: #6a11cb; /* Purple */
+            --secondary-color: #8e2de2; /* Deep violet */
+            --accent-color: #2575fc; /* Bright blue */
+            --highlight-color: #c2a8ff; /* Light lavender */
+            --light-background: #f5f7fa;
+            --dark-background: #222222;
+            --white: #ffffff;
+            --text-color: #222222;
+            --light-text: #777777;
+            --border-color: #e0e0e0;
+            --black: #000000;
         }
-
 
         * {
             margin: 0;
@@ -27,7 +26,7 @@
         }
 
         body {
-            background: var(--background-light);
+            background: var(--light-background);
             color: var(--text-color);
             min-height: 100vh;
             display: flex;
@@ -35,15 +34,14 @@
         }
 
         header {
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 25px;
+            background: var(--white); /* White background */
+            color: var(--accent-color); /* Purple text */
+            padding: 30px 20px;
             text-align: center;
-            font-size: 28px;
+            font-size: 30px;
             font-weight: bold;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Lighter shadow */
         }
-
         main {
             flex: 1;
             padding: 40px 20px;
@@ -120,20 +118,155 @@
             color: #f0f0f0;
         }
 
-        footer {
-            margin-top: auto;
-            background: var(--black);
-            color: white;
-            text-align: center;
-            padding: 15px 0;
+        .footer {
+            background-color: #1e1e1e;
+            color: #fff;
+            padding: 40px 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-section {
+            flex: 1 1 300px;
+            margin: 10px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .footer-section p,
+        .footer-section li,
+        .footer-section a {
+            font-size: 14px;
+            color: #ccc;
+            line-height: 1.6;
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            color: #a855f7; /* Purple hover */
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section li {
+            margin-bottom: 8px;
+        }
+
+        .footer-section i {
+            margin-right: 8px;
+        }
+
+        .footer hr {
+            border: none;
+            border-top: 1px solid #444;
+            margin: 30px 0;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            color: #ccc;
             font-size: 14px;
         }
+
+        .social-icons i {
+            margin-left: 15px;
+            font-size: 18px;
+            color: #ccc;
+            cursor: pointer;
+        }
+
+        .social-icons i:hover {
+            color: #a855f7;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo h1 {
+            color: var(--primary-color);
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .main-nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .auth-buttons {
+            background-color: #ccc;
+            padding: 6px 16px;
+            border-radius: 999px;
+            font-size: 13px;
+            color: white;
+            font-weight: 500;
+        }
+
+        .auth-buttons a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .auth-buttons a:hover {
+            text-decoration: underline;
+        }
+
     </style>
 </head>
 <body>
 
 <header>
-    Confirm Your Booking ✨
+    <div class="container">
+        <div class="logo">
+            <h1>GlowUp</h1>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="Salon%20Listing.html">Salons</a></li>
+                <li><a href="Services.html">Services</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+        </nav>
+        <div class="auth-buttons">
+            <div class="user-greeting" id="userGreeting">
+                Welcome! <a href="login.html">Sign In</a> or <a href="register.html">Join Free</a>
+            </div>
+        </div>
+    </div>
 </header>
 
 <main>
@@ -161,9 +294,41 @@
     </div>
 </main>
 
-<footer>
-    &copy; 2025 GlowUp WebApp. All Rights Reserved.
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>GlowUp</h3>
+            <p>Your premier salon booking platform connecting customers with the best beauty professionals.</p>
+        </div>
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="Salon%20Listing.html">Salons</a></li>
+                <li><a href="Services.html">Services</a></li>
+                <li><a href="About.html">About Us</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Contact</h3>
+            <p><i class="fas fa-envelope"></i> info@glowup.com</p>
+            <p><i class="fas fa-phone-alt"></i> +1 (555) 123-4567</p>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Beauty St, Glamour City</p>
+        </div>
+    </div>
+    <hr>
+    <div class="footer-bottom">
+        <p>© 2023 GlowUp. All rights reserved.</p>
+        <div class="social-icons">
+            <i class="fab fa-facebook-f"></i>
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-twitter"></i>
+        </div>
+    </div>
 </footer>
+
+<!-- Font Awesome CDN for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {

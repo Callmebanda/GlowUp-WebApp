@@ -444,3 +444,93 @@ a:hover {
     background: var(--background-light);
     color: var(--primary-color);
 }
+
+
+..salon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.salon-card {
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.salon-card:hover {
+    transform: translateY(-5px);
+}
+
+.salon-image {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.salon-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.salon-image .rating {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 5px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.salon-info {
+    padding: 16px;
+}
+
+.salon-info h3 {
+    margin: 0 0 8px;
+    font-size: 18px;
+}
+
+.salon-info .location,
+.salon-info .services {
+    margin: 4px 0;
+    color: #666;
+}
+
+.btn.btn-outline {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 12px;
+    border: 1px solid #333;
+    color: #333;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.btn.btn-outline:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+..btn-primary {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #4B0082; /* Dark purple */
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #360062; /* Slightly darker shade on hover */
+}
+

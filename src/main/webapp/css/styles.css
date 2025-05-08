@@ -1,0 +1,216 @@
+:root {
+    --primary-color: #9d4edd; /* Vivid Purple */
+    --secondary-color: #4cc9f0; /* Bright Sky Blue */
+    --accent-color: #ff6b81; /* Bright Coral */
+    --highlight-color: #fcbf49; /* Warm Yellow */
+    --text-color: #222222; /* Deep Charcoal for better readability */
+    --light-text: #555555; /* Soft Dark Gray */
+    --border-color: #c3c3c3; /* Light Gray */
+    --background-light: #f0e5ff; /* Very Light Purple */
+    --background-bright: #e0f7fa; /* Very Light Aqua */
+    --background-soft: #ffe0e9; /* Light Pinkish */
+    --success-color: #00c897; /* Fresh Mint Green */
+    --danger-color: #ff4d6d; /* Bold Pinkish Red */
+    --black: #0d0d0d; /* Not pure black, slightly softened */
+}
+
+
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: var(--background-light);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+header {
+    background: var(--white);
+    padding: 16px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--border-color);
+    border-radius: 10px 10px 0 0;
+}
+
+header h1 {
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+nav ul li a {
+    color: var(--black);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: var(--secondary-color);
+}
+
+/* Horizontal scroll container */
+.horizontal-container {
+    display: flex;
+    overflow-x: auto;
+    padding: 40px;
+    gap: 30px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+    scrollbar-color: #9d4edd #e0d4f7;
+}
+
+/* Scrollbar for Chrome */
+.horizontal-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.horizontal-container::-webkit-scrollbar-thumb {
+    background: #9d4edd;
+    border-radius: 10px;
+}
+
+/* Each Main Card (hero, services, etc.) */
+.main-card {
+    flex: 0 0 350px;
+    min-height: 500px;
+    border-radius: 20px;
+    background: var(--white);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    scroll-snap-align: center;
+    transition: transform 0.3s ease;
+}
+
+.main-card:hover {
+    transform: translateY(-8px);
+}
+
+/* Different Backgrounds */
+#hero {
+    background: linear-gradient(135deg, #ffe0f7, #f9f0ff);
+}
+
+#services {
+    background: linear-gradient(135deg, #e0e7ff, #f0f4ff);
+}
+
+#products {
+    background: linear-gradient(135deg, #f9ffe0, #fff9e5);
+}
+
+#location {
+    background: linear-gradient(135deg, #e0fff5, #e5fff9);
+}
+
+#reviews {
+    background: linear-gradient(135deg, #ffe0e0, #fff0f0);
+}
+
+/* Buttons */
+.button, button {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 15px;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.button:hover, button:hover {
+    background-color: var(--secondary-color);
+    transform: scale(1.05);
+}
+
+/* Cards inside services/products */
+.service-cards, .product-cards, .review-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.service-card, .product-card, .review-card {
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    padding: 15px;
+    width: 140px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.service-card:hover, .product-card:hover, .review-card:hover {
+    transform: scale(1.05);
+}
+
+/* Stars for Reviews */
+.stars {
+    color: gold;
+    font-size: 1.2rem;
+    margin-top: 5px;
+}
+
+/* Placeholder for Images or Maps */
+.image-placeholder, .map-placeholder {
+    background: var(--background-light);
+    height: 100px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+/* Footer */
+footer {
+    background: var(--white);
+    color: var(--black);
+    padding: 20px 32px;
+    text-align: center;
+    font-size: 0.9rem;
+    border-top: 1px solid var(--border-color);
+    border-radius: 0 0 10px 10px;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+    header, nav ul {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .horizontal-container {
+        padding: 20px;
+        gap: 20px;
+    }
+}
