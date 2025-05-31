@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlowUp - Find Your Perfect Salon</title>
+    <style>
+        :root {
+            --primary-color: #8a2be2;
+            --secondary-color: #6a1b9a;
+            --accent-color: #e1bee7;
+            --text-color: #333;
+            --light-text: #777;
+            --border-color: #e0e0e0;
+            --background-light: #f9f9f9;
+            --white: #ffffff;
+            --black: #000000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: var(--background-light);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: 500;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn-large {
+            padding: 12px 30px;
+            font-size: 1.1rem;
+        }
+
+        /* Header Styles */
+        .main-header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo h1 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin: 0;
+        }
+
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        .main-nav li {
+            margin-left: 25px;
+        }
+
+        .main-nav a {
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        .main-nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .auth-buttons .btn {
+            margin-left: 10px;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-color);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .hero-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .search-bar {
+            max-width: 700px;
+            margin: 0 auto;
+            display: flex;
+        }
+
+        .search-input {
+            flex-grow: 1;
+            position: relative;
+        }
+
+        .search-input i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--light-text);
+        }
+
+        .search-input input {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border-radius: 4px 0 0 4px;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .search-bar button {
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* Section Styles */
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary-color);
+            margin: 15px auto 0;
+        }
+
+        /* Salon Card Styles */
+        .salon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .salon-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .salon-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .salon-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .rating {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .salon-info {
+            padding: 20px;
+        }
+
+        .salon-info h3 {
+            margin-bottom: 10px;
+        }
+
+        .location, .services {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            color: var(--light-text);
+        }
+
+        .location i, .services i {
+            margin-right: 8px;
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            padding: 60px 0;
+            background-color: var(--white);
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .step {
+            padding: 30px 20px;
+            border-radius: 8px;
+            background-color: var(--background-light);
+            transition: transform 0.3s;
+        }
+
+        .step:hover {
+            transform: translateY(-10px);
+        }
+
+        .step-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+
+        /* Footer Styles */
+        .main-footer {
+            background-color: #2d0036;
+            color: var(--white);
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-icons a {
+            display: inline-block;
+            margin-left: 15px;
+            color: var(--white);
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .main-header .container {
+                flex-direction: column;
+                padding: 15px;
+            }
+
+            .logo {
+                margin-bottom: 15px;
+            }
+
+            .main-nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .main-nav li {
+                margin: 10px 0;
+            }
+
+            .auth-buttons {
+                margin-top: 15px;
+            }
+
+            .hero {
+                padding: 60px 0;
+            }
+
+            .hero-content h2 {
+                font-size: 2rem;
+            }
+
+            .search-bar {
+                flex-direction: column;
+            }
+
+            .search-input input {
+                border-radius: 4px;
+                margin-bottom: 10px;
+            }
+
+            .search-bar button {
+                border-radius: 4px;
+                width: 100%;
+            }
+        }
+        .logged-in-only {
+            display: none;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+<header class="main-header">
+    <div class="container">
+        <div class="logo">
+            <h1>GlowUp</h1>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="salon-listing.html">Salons</a></li>
+                <li><a href="Services.html">Services</a></li>
+                <li><a href="About.html">About</a></li>
+                <a href="customer-dashboard.html" class="logged-in-only">Dashboard</a>
+            </ul>
+        </nav>
+        <div class="auth-buttons">
+            <div class="user-greeting" id="userGreeting">
+                Welcome! <a href="login.html">Sign In</a> or <a href="register.html">Join Free</a>
+            </div>
+
+            <!-- Will be populated by JS if logged in -->
+            <div class="user-menu" id="userMenu" style="display:none">
+                <button class="user-avatar">
+                    <img src="images/default-avatar.jpg" alt="User">
+                </button>
+                <div class="dropdown-menu">
+                    <a href="customer-dashboard.html">My Appointments</a>
+                    <a href="#" id="logout">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<main>
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Discover Your Perfect Salon Experience</h2>
+                <p>Book appointments with top-rated salons in your area</p>
+                <div class="search-bar">
+                    <form action="salon-listing.html" method="get">
+                        <div class="search-input">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="Search for salons, services, or locations">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="featured-salons">
+        <div class="container">
+            <h2 class="section-title">Featured Salons</h2>
+
+            <div class="salon-grid">
+                <!-- Salon Card 1 -->
+                <div class="salon-card">
+                    <a href="salon-profile.html?salonId=1">
+                        <div class="salon-image">
+                            <img src="../../images/luxury.jpeg" alt="Luxury Hair Studio" />
+                            <span class="rating">4.8 <i class="fas fa-star"></i></span>
+                        </div>
+                        <div class="salon-info">
+                            <h3>Luxury Hair Studio</h3>
+                            <p class="location"><i class="fas fa-map-marker-alt"></i> Downtown</p>
+                            <p class="services">Hair, Nails, Spa</p>
+                            <span class="btn btn-outline">View Salon</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Salon Card 2 -->
+                <div class="salon-card">
+                    <a href="salon-profile.html?salonId=2">
+                        <div class="salon-image">
+                            <img src="../../images/shiny.jpeg" alt="Shiny Nails" />
+                            <span class="rating">4.9 <i class="fas fa-star"></i></span>
+                        </div>
+                        <div class="salon-info">
+                            <h3>Shiny Nails</h3>
+                            <p class="location"><i class="fas fa-map-marker-alt"></i> Westside</p>
+                            <p class="services">Nails, Waxing</p>
+                            <span class="btn btn-outline">View Salon</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Salon Card 3 -->
+                <div class="salon-card">
+                    <a href="salon-profile.html?salonId=3">
+                        <div class="salon-image">
+                            <img src="../../images/gentleman.jpeg" alt="Gentleman's Barbershop" />
+                            <span class="rating">4.7 <i class="fas fa-star"></i></span>
+                        </div>
+                        <div class="salon-info">
+                            <h3>Gentleman's Barbershop</h3>
+                            <p class="location"><i class="fas fa-map-marker-alt"></i> East District</p>
+                            <p class="services">Haircuts, Shaves</p>
+                            <span class="btn btn-outline">View Salon</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <a href="salon-listing.html" class="btn btn-primary">View All Salons</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How GlowUp Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>1. Find a Salon</h3>
+                    <p>Browse our directory of top-rated salons and beauty professionals</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3>2. Book an Appointment</h3>
+                    <p>Select your preferred service, date, and time with real-time availability</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <h3>3. Enjoy Your Service</h3>
+                    <p>Relax and look your best with our trusted professionals</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="main-footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>GlowUp</h3>
+                <p>Your premier salon booking platform connecting customers with the best beauty professionals.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="salon-listing.html">Salons</a></li>
+                    <li><a href="Services.html">Services</a></li>
+                    <li><a href="About.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> info@glowup.com</li>
+                    <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Beauty St, Glamour City</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 GlowUp. All rights reserved.</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

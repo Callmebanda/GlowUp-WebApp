@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Services - GlowUp</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Manage Services</h1>
+
+    <!-- Add New Service Form -->
+    <div class="form-container">
+        <h2>Add New Service</h2>
+        <form id="addServiceForm" action="../salon/add-service" method="post">
+            <input type="hidden" name="salonId" value="${param.salonId}">
+
+            <div class="form-group">
+                <label>Service Name:</label>
+                <input type="text" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label>Description:</label>
+                <textarea name="description"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Price ($):</label>
+                <input type="number" name="price" step="0.01" min="0" required>
+            </div>
+
+            <div class="form-group">
+                <label>Duration (minutes):</label>
+                <input type="number" name="duration" min="15" required>
+            </div>
+
+            <div class="form-group">
+                <label>Category:</label>
+                <select name="category" required>
+                    <option value="hair">Hair</option>
+                    <option value="nails">Nails</option>
+                    <option value="spa">Spa</option>
+                    <option value="barber">Barber</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Gender:</label>
+                <select name="gender" required>
+                    <option value="unisex">Unisex</option>
+                    <option value="men">Men</option>
+                    <option value="women">Women</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn">Add Service</button>
+        </form>
+    </div>
+
+    <!-- Current Services List -->
+    <div class="services-list">
+        <h2>Current Services</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Duration</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach var="service" items="${services}">
+                <tr>
+                    <td>${service.name}</td>
+                    <td>${service.description}</td>
+                    <td>$${service.price}</td>
+                    <td>${service.durationMinutes} mins</td>
+                    <td>
+                        <form action="../salon/remove-service" method="post"
+                              onsubmit="return confirm('Are you sure?')">
+                            <input type="hidden" name="serviceId" value="${service.serviceId}">
+                            <button type="submit" class="btn btn-danger">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    // Check for success/error messages in URL
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('added')) {
+        alert(urlParams.get('added') === '1' ? 'Service added successfully!' : 'Failed to add service');
+    }
+    if (urlParams.has('removed')) {
+        alert(urlParams.get('removed') === '1' ? 'Service removed successfully!' : 'Failed to remove service');
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlowUp - Customer Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6a0dad;
+            --primary-light: #9c27b0;
+            --primary-dark: #4a148c;
+            --secondary-color: #ff9800;
+            --text-light: #f3e5f5;
+            --text-dark: #212121;
+            --background: #f5f5f5;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background);
+            color: var(--text-dark);
+        }
+
+        .main-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            color: white;
+        }
+
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-nav li {
+            margin-left: 2rem;
+        }
+
+        .main-nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .main-nav a:hover {
+            color: var(--secondary-color);
+        }
+
+        .main-nav a.active {
+            color: var(--secondary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.3rem;
+        }
+
+        .user-avatar {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .user-avatar img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid white;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .dropdown-menu a {
+            color: var(--text-dark);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: var(--primary-light);
+            color: white;
+        }
+
+        .user-menu {
+            position: relative;
+            display: inline-block;
+        }
+
+        .user-menu:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dashboard-main {
+            padding: 2rem 0;
+        }
+
+        .dashboard-main h1 {
+            color: var(--primary-dark);
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-tabs {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 1.5rem;
+        }
+
+        .tab-btn {
+            padding: 0.8rem 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .tab-btn:hover {
+            color: var(--primary-light);
+        }
+
+        .tab-btn.active {
+            color: var(--primary-color);
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .appointments-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .appointment-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .appointment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .appointment-card h3 {
+            margin-top: 0;
+            color: var(--primary-dark);
+        }
+
+        .appointment-card p {
+            margin: 0.5rem 0;
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .view-details {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .view-details:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .cancel {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .cancel:hover {
+            background-color: #d32f2f;
+        }
+
+        .reschedule {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .reschedule:hover {
+            background-color: #f57c00;
+        }
+
+        .no-appointments {
+            padding: 2rem;
+            text-align: center;
+            color: #666;
+            font-style: italic;
+        }
+
+        .status-confirmed {
+            color: #4caf50;
+            font-weight: 600;
+        }
+
+        .status-pending {
+            color: #ff9800;
+            font-weight: 600;
+        }
+
+        .status-completed {
+            color: #2196f3;
+            font-weight: 600;
+        }
+
+        .status-rejected {
+            color: #f44336;
+            font-weight: 600;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .close-modal:hover {
+            color: var(--text-dark);
+        }
+
+        #appointment-details {
+            margin: 1.5rem 0;
+        }
+
+        #appointment-details p {
+            margin: 0.8rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .main-nav {
+                margin: 1rem 0;
+            }
+
+            .main-nav ul {
+                flex-direction: column;
+            }
+
+            .main-nav li {
+                margin: 0.5rem 0;
+                margin-left: 0;
+            }
+
+            .auth-buttons {
+                margin-top: 1rem;
+            }
+
+            .dashboard-tabs {
+                flex-direction: column;
+            }
+
+            .tab-btn {
+                text-align: left;
+                padding: 0.8rem 0;
+            }
+
+            .appointments-list {
+                grid-template-columns: 1fr;
+            }
+        }
+        /* Footer Styles */
+        .main-footer {
+            background-color: #2d0036;
+            color: var(--white);
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-icons a {
+            display: inline-block;
+            margin-left: 15px;
+            color: var(--white);
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: var(--accent-color);
+        }
+        /* Header Enhancements */
+        .user-type {
+            font-size: 0.6em;
+            vertical-align: middle;
+            background: var(--primary-light);
+            padding: 2px 8px;
+            border-radius: 12px;
+            margin-left: 5px;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Footer Enhancements */
+        .main-footer {
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            padding: 60px 0 20px;
+            margin-top: 50px;
+        }
+
+        .footer-section h3 i {
+            margin-right: 10px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            margin-top: 15px;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .newsletter-form button {
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 0 15px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+
+        .app-badges {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+<header class="main-header">
+    <div class="container">
+        <div class="logo">
+            <h1>GlowUp <span class="user-type">Customer</span></h1>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="salon-listing.html">Find Salons</a></li>
+                <li><a href="customer-dashboard.html" class="active">My Appointments</a></li>
+            </ul>
+        </nav>
+        <div class="auth-buttons">
+            <div class="user-menu">
+                <button class="user-avatar">
+                    <img src="images/default-avatar.jpg" alt="User">
+                    <span id="customer-notification" class="notification-badge">3</span>
+                </button>
+                <div class="dropdown-menu">
+                    <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+                    <a href="notifications.jsp"><i class="fas fa-bell"></i> Notifications</a>
+                    <a href="#" id="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="dashboard-main">
+    <div class="container">
+        <h1>Welcome back, <span id="customer-name"></span></h1>
+
+        <div class="dashboard-tabs">
+            <button class="tab-btn active" data-tab="upcoming">Upcoming</button>
+            <button class="tab-btn" data-tab="pending">Pending</button>
+            <button class="tab-btn" data-tab="history">History</button>
+        </div>
+
+        <div class="tab-content active" id="upcoming-tab">
+            <h2>Upcoming Appointments</h2>
+            <div id="upcoming-appointments" class="appointments-list"></div>
+        </div>
+
+        <div class="tab-content" id="pending-tab">
+            <h2>Pending Approval</h2>
+            <div id="pending-appointments" class="appointments-list"></div>
+        </div>
+
+        <div class="tab-content" id="history-tab">
+            <h2>Booking History</h2>
+            <div id="past-appointments" class="appointments-list"></div>
+        </div>
+    </div>
+</main>
+
+<div id="appointment-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2>Appointment Details</h2>
+        <div id="appointment-details">
+            <p><strong>Salon:</strong> <span id="appointment-salon"></span></p>
+            <p><strong>Date & Time:</strong> <span id="appointment-datetime"></span></p>
+            <p><strong>Service:</strong> <span id="appointment-service"></span></p>
+            <p><strong>Stylist:</strong> <span id="appointment-stylist"></span></p>
+            <p><strong>Status:</strong> <span id="appointment-status"></span></p>
+        </div>
+        <button class="btn cancel" id="modal-cancel-btn">Cancel Appointment</button>
+        <button class="btn reschedule" id="modal-reschedule-btn">Reschedule</button>
+    </div>
+</div>
+
+<footer class="main-footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>GlowUp</h3>
+                <p>Your premier salon booking platform connecting customers with the best beauty professionals.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="Salon%20Listing.html">Salons</a></li>
+                    <li><a href="Services.html">Services</a></li>
+                    <li><a href="About.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> info@glowup.com</li>
+                    <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Beauty St, Glamour City</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 GlowUp. All rights reserved.</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="js/customer-dashboard.js"></script>
+</body>
+
+</html>
