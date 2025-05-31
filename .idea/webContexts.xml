@@ -4,7 +4,11 @@
     <option name="state">
       <map>
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Salon Listing.html" value="file://$PROJECT_DIR$/src/main/webapp" />
+<<<<<<< HEAD
         <entry key="file://$PROJECT_DIR$/src/main/webapp/manage-services.html" value="file://$PROJECT_DIR$/src/main/webapp" />
+=======
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/index.html" value="file://$PROJECT_DIR$/src/main/webapp" />
+>>>>>>> 1fc0e8b4aead21815ee64711e16f9a850303b202
       </map>
     </option>
   </component>

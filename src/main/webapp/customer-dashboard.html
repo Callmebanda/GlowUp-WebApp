@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<<<<<<< HEAD
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GlowUp - Customer Dashboard</title>
@@ -609,4 +610,441 @@
 <script src="js/customer-dashboard.js"></script>
 </body>
 
+=======
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GlowUp - Customer Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Header */
+    /* Header */
+    header.main-header {
+      background-color: white;
+      padding: 15px 40px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .header-flex {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo h1 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 700;
+      color: #8000c8;
+    }
+
+    .main-nav {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    .main-nav ul {
+      list-style: none;
+      display: flex;
+      gap: 40px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .main-nav a {
+      color: #222;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 16px;
+    }
+
+    .main-nav a.active {
+      text-decoration: underline;
+    }
+
+    .user-menu {
+      /* Removed background-color and padding */
+      font-weight: 600;
+      font-size: 14px;
+      color: black;  /* You can adjust this color as needed */
+    }
+
+
+    .user-avatar img {
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+    }
+
+    .dashboard-tabs {
+      display: flex;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #ddd;
+    }
+
+    .tab-btn {
+      padding: 10px 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .tab-btn.active {
+      color: #6b4eff;
+      border-bottom: 3px solid #6b4eff;
+    }
+
+    .tab-content {
+      display: none;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .appointment-card {
+      background: white;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-left: 4px solid #6b4eff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .btn {
+      padding: 8px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    .view-details {
+      background-color: #6b4eff;
+      color: white;
+    }
+
+    .cancel {
+      background-color: #000000;
+      color: white;
+    }
+
+    .reschedule {
+      background-color: #a083ff;
+      color: white;
+    }
+
+    .status-pending {
+      color: #ff9800;
+      font-weight: bold;
+    }
+
+    .status-confirmed {
+      color: #4caf50;
+      font-weight: bold;
+    }
+
+    .status-cancelled {
+      color: #f44336;
+      font-weight: bold;
+    }
+
+    .footer {
+      background-color: #1e1e1e;
+      color: #fff;
+      padding: 40px 20px;
+      font-family: Arial, sans-serif;
+    }
+
+    .footer-container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-section {
+      flex: 1 1 300px;
+      margin: 10px;
+    }
+
+    .footer-section h3 {
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    .footer-section p,
+    .footer-section li,
+    .footer-section a {
+      font-size: 14px;
+      color: #ccc;
+      line-height: 1.6;
+      text-decoration: none;
+    }
+
+    .footer-section a:hover {
+      color: #a855f7; /* Purple hover */
+    }
+
+    .footer-section ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-section li {
+      margin-bottom: 8px;
+    }
+
+    .footer-section i {
+      margin-right: 8px;
+    }
+
+    .footer hr {
+      border: none;
+      border-top: 1px solid #444;
+      margin: 30px 0;
+    }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      color: #ccc;
+      font-size: 14px;
+    }
+
+    .social-icons i {
+      margin-left: 15px;
+      font-size: 18px;
+      color: #ccc;
+      cursor: pointer;
+    }
+
+    .social-icons i:hover {
+      color: #a855f7;
+    }
+
+
+    .social-icons {
+      margin-top: 10px;
+    }
+
+    .social-icons a {
+      color: var(--white);
+      font-size: 22px;
+      margin: 0 8px;
+      transition: color 0.3s;
+    }
+
+    .social-icons a:hover {
+      color: var(--primary-color);
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="main-header">
+  <div class="container header-flex">
+    <div class="logo">
+      <h1>GlowUp</h1>
+    </div>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="Salon%20Listing.html">Salons</a></li>
+        <li><a href="Services.html">Services</a></li>
+        <li><a href="About.html">About</a></li>
+        <li><a href="profile.html">Your Profile</a></li> <!-- New Profile Link -->
+      </ul>
+    </nav>
+    <div class="user-menu">
+      <button id="logout-btn" class="btn cancel">Logout</button>
+    </div>
+
+
+    <script>
+      document.getElementById('logout-btn').addEventListener('click', function() {
+        const userConfirmed = confirm("Are you sure you want to log out?");
+        if (userConfirmed) {
+          window.location.href = 'index.html';
+        }
+      });
+    </script>
+
+  </div>
+</header>
+
+<!-- Main Content -->
+<main class="dashboard-main">
+  <div class="container">
+    <h1>Welcome back</h1>
+
+    <div class="dashboard-tabs">
+      <button class="tab-btn active" data-tab="upcoming">Upcoming</button>
+      <button class="tab-btn" data-tab="pending">Pending</button>
+      <button class="tab-btn" data-tab="history">History</button>
+    </div>
+
+    <div class="tab-content active" id="upcoming-tab">
+      <h2>Upcoming Appointments</h2>
+      <div id="upcoming-appointments"></div>
+    </div>
+
+    <div class="tab-content" id="pending-tab">
+      <h2>Pending Approval</h2>
+      <div id="pending-appointments"></div>
+    </div>
+
+    <div class="tab-content" id="history-tab">
+      <h2>Booking History</h2>
+      <div id="past-appointments"></div>
+    </div>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-section">
+      <h3>GlowUp</h3>
+      <p>Your premier salon booking platform connecting customers with the best beauty professionals.</p>
+    </div>
+    <div class="footer-section">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="Salon%20Listing.html">Salons</a></li>
+        <li><a href="Services.html">Services</a></li>
+        <li><a href="About.html">About Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h3>Contact</h3>
+      <p><i class="fas fa-envelope"></i> info@glowup.com</p>
+      <p><i class="fas fa-phone-alt"></i> +1 (555) 123-4567</p>
+      <p><i class="fas fa-map-marker-alt"></i> 123 Beauty St, Glamour City</p>
+    </div>
+  </div>
+  <hr>
+  <div class="footer-bottom">
+    <p>© 2023 GlowUp. All rights reserved.</p>
+    <div class="social-icons">
+      <i class="fab fa-facebook-f"></i>
+      <i class="fab fa-instagram"></i>
+      <i class="fab fa-twitter"></i>
+    </div>
+  </div>
+</footer>
+
+<!-- Font Awesome CDN for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+<!-- JavaScript -->
+<script>
+  const testAppointments = [
+    { appointment_id: 3, salonName: "Luxury Hair Studio", serviceName: "Women's Haircut", appointment_date: "2025-04-30", start_time: "10:00:00", status: "confirmed" },
+    { appointment_id: 1, salonName: "Urban Nails Lounge", serviceName: "Gel Manicure", appointment_date: "2025-05-02", start_time: "10:00:00", status: "pending" },
+    { appointment_id: 2, salonName: "Luxury Hair Studio", serviceName: "Women's Haircut", appointment_date: "2025-06-10", start_time: "12:00:00", status: "pending" },
+    { appointment_id: 4, salonName: "Luxury Hair Studio", serviceName: "Women's Haircut", appointment_date: "2025-05-15", start_time: "10:00:00", status: "pending" },
+    { appointment_id: 5, salonName: "Luxury Hair Studio", serviceName: "Balayage Highlights", appointment_date: "2025-05-16", start_time: "14:00:00", status: "cancelled" }
+  ];
+
+  const organizedAppointments = {
+    upcoming: testAppointments.filter(appt =>
+            appt.status === 'confirmed' && new Date(appt.appointment_date) >= new Date()
+    ),
+    pending: testAppointments.filter(appt => appt.status === 'pending'),
+    history: testAppointments.filter(appt =>
+            appt.status === 'cancelled' || new Date(appt.appointment_date) < new Date()
+    )
+  };
+
+  function formatDate(dateStr) {
+    return new Date(dateStr).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  }
+
+  function formatTime(timeStr) {
+    const [h, m] = timeStr.split(':');
+    const hour = parseInt(h);
+    const suffix = hour >= 12 ? 'PM' : 'AM';
+    const hour12 = hour % 12 || 12;
+    return `${hour12}:${m} ${suffix}`;
+  }
+
+  function renderAppointments(appointments, containerId) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = '';
+
+    if (appointments.length === 0) {
+      container.innerHTML = '<p>No appointments found</p>';
+      return;
+    }
+
+    appointments.forEach(appt => {
+      const card = document.createElement('div');
+      card.className = 'appointment-card';
+
+      card.innerHTML = `
+          <h3>${appt.serviceName}</h3>
+          <p><strong>Salon:</strong> ${appt.salonName}</p>
+          <p><strong>Date:</strong> ${formatDate(appt.appointment_date)}</p>
+          <p><strong>Time:</strong> ${formatTime(appt.start_time)}</p>
+          <p><strong>Status:</strong> <span class="status-${appt.status}">${appt.status}</span></p>
+          <div class="appointment-actions">
+            <button class="btn view-details" data-id="${appt.appointment_id}">Details</button>
+            <button class="btn cancel" data-id="${appt.appointment_id}">Cancel</button>
+            ${appt.status === 'confirmed' ? `<button class="btn reschedule" data-id="${appt.appointment_id}">Reschedule</button>` : ''}
+          </div>
+        `;
+      container.appendChild(card);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    renderAppointments(organizedAppointments.upcoming, 'upcoming-appointments');
+    renderAppointments(organizedAppointments.pending, 'pending-appointments');
+    renderAppointments(organizedAppointments.history, 'past-appointments');
+
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const tab = btn.getAttribute('data-tab');
+        document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+        document.getElementById(`${tab}-tab`).classList.add('active');
+      });
+    });
+  });
+</script>
+</body>
+>>>>>>> 1fc0e8b4aead21815ee64711e16f9a850303b202
 </html>

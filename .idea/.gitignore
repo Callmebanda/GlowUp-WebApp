@@ -1,8 +1,17 @@
 # Default ignored files
 /shelf/
 /workspace.xml
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 1fc0e8b4aead21815ee64711e16f9a850303b202
 # Editor-based HTTP Client requests
 /httpRequests/
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 485225a (Removed nested .git repo and added full project structure)
+>>>>>>> 1fc0e8b4aead21815ee64711e16f9a850303b202

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlowUp - Find Your Perfect Salon</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+<header class="main-header">
+    <div class="container">
+        <div class="logo">
+            <h1>GlowUp</h1>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="salons.html">Salons</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">How It Works</a></li>
+            </ul>
+        </nav>
+        <div class="auth-buttons">
+            <div class="user-greeting" id="userGreeting">
+                Welcome! <a href="login.html">Sign In</a> or <a href="register.html">Join Free</a>
+            </div>
+            <!-- Will be populated by JS if logged in -->
+            <div class="user-menu" id="userMenu" style="display:none">
+                <button class="user-avatar">
+                    <img src="images/default-avatar.jpg" alt="User">
+                </button>
+                <div class="dropdown-menu">
+                    <a href="dashboard.html">My Appointments</a>
+                    <a href="profile.html">Profile</a>
+                    <a href="#" id="logout">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<main>
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Discover Your Perfect Salon Experience</h2>
+                <p>Book appointments with top-rated salons in your area</p>
+                <div class="search-bar">
+                    <form action="salons.html" method="get">
+                        <div class="search-input">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="Search for salons, services, or locations">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Search</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="featured-salons">
+        <div class="container">
+            <h2 class="section-title">Featured Salons</h2>
+            <div class="salon-grid">
+                <!-- Salon Card 1 -->
+                <div class="salon-card">
+                    <div class="salon-image" style="background-image: url('images/salon1.jpg')">
+                        <span class="rating">4.8 <i class="fas fa-star"></i></span>
+                    </div>
+                    <div class="salon-info">
+                        <h3>Luxury Hair Studio</h3>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> Downtown</p>
+                        <p class="services">Hair, Nails, Spa</p>
+                        <a href="salon-profile.html" class="btn btn-outline">View Salon</a>
+                    </div>
+                </div>
+
+                <!-- Salon Card 2 -->
+                <div class="salon-card">
+                    <div class="salon-image" style="background-image: url('images/salon2.jpg')">
+                        <span class="rating">4.9 <i class="fas fa-star"></i></span>
+                    </div>
+                    <div class="salon-info">
+                        <h3>Urban Nails Lounge</h3>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> Westside</p>
+                        <p class="services">Nails, Waxing</p>
+                        <a href="salon-profile.html" class="btn btn-outline">View Salon</a>
+                    </div>
+                </div>
+
+                <!-- Salon Card 3 -->
+                <div class="salon-card">
+                    <div class="salon-image" style="background-image: url('images/salon3.jpg')">
+                        <span class="rating">4.7 <i class="fas fa-star"></i></span>
+                    </div>
+                    <div class="salon-info">
+                        <h3>Gentleman's Barbershop</h3>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> East District</p>
+                        <p class="services">Haircuts, Shaves</p>
+                        <a href="salon-profile.html" class="btn btn-outline">View Salon</a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <a href="salons.html" class="btn btn-primary">View All Salons</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How GlowUp Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>1. Find a Salon</h3>
+                    <p>Browse our directory of top-rated salons and beauty professionals</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3>2. Book an Appointment</h3>
+                    <p>Select your preferred service, date, and time with real-time availability</p>
+                </div>
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <h3>3. Enjoy Your Service</h3>
+                    <p>Relax and look your best with our trusted professionals</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="main-footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>GlowUp</h3>
+                <p>Your premier salon booking platform connecting customers with the best beauty professionals.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="salons.html">Salons</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> info@glowup.com</li>
+                    <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Beauty St, Glamour City</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 GlowUp. All rights reserved.</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

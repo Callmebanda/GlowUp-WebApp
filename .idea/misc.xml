@@ -4,7 +4,15 @@
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/pom.xml" />
+=======
+<<<<<<< HEAD
+        <option value="$PROJECT_DIR$/pom.xml" />
+=======
+        <option value="$PROJECT_DIR$/GlowUp-WebApp/pom.xml" />
+>>>>>>> 485225a (Removed nested .git repo and added full project structure)
+>>>>>>> 1fc0e8b4aead21815ee64711e16f9a850303b202
       </list>
     </option>
   </component>

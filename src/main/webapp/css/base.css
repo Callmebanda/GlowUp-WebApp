@@ -1,0 +1,49 @@
+/* base.css */
+:root {
+    --primary-color: #ff6b6b;
+    --secondary-color: #2575fc;
+    --accent-color: #6a11cb;
+    --background-light: #f5f7fa;
+    --text-color: #333333;
+    --light-text: #777777;
+    --border-color: #e0e0e0;
+    --dark-background: #222;
+    --highlight-color: #ffb6b6;
+    --white: #ffffff;
+    --black: #000000;
+}
+
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: var(--background-light);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: var(--white);
+    padding: 25px;
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+footer {
+    margin-top: auto;
+    background: var(--black);
+    color: var(--white);
+    text-align: center;
+    padding: 15px 0;
+    font-size: 14px;
+}

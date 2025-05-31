@@ -4,6 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+<<<<<<< HEAD
     <groupId>org.example</groupId>
     <artifactId>GlowUpFinal</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -14,11 +15,21 @@
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+=======
+    <groupId>com.glowup</groupId>
+    <artifactId>glowup-booking</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+>>>>>>> 1fc0e8b4aead21815ee64711e16f9a850303b202
 
     <name>GlowUp Booking System</name>
     <description>Modern salon booking system with Java 21</description>
 
+<<<<<<< HEAD
 
+=======
+    <properties>
+>>>>>>> 1fc0e8b4aead21815ee64711e16f9a850303b202
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>21</java.version>
@@ -86,6 +97,7 @@
             <artifactId>json</artifactId>
             <version>20240303</version>
         </dependency>
+<<<<<<< HEAD
         <dependency>
             <groupId>org.glassfish.web</groupId>
             <artifactId>jakarta.servlet.jsp.jstl</artifactId>
@@ -95,6 +107,12 @@
 
     <build>
         <finalName>GlowUpFinal</finalName>
+=======
+    </dependencies>
+
+    <build>
+        <finalName>GlowUp-WebApp</finalName>
+>>>>>>> 1fc0e8b4aead21815ee64711e16f9a850303b202
 
         <plugins>
             <!-- Modern Java compilation -->
