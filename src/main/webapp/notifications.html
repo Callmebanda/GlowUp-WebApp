@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications - GlowUp</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6a0dad;
+            --primary-light: #9c27b0;
+            --primary-dark: #4a148c;
+            --success-color: #4CAF50;
+            --danger-color: #F44336;
+            --warning-color: #FF9800;
+            --text-light: #f3e5f5;
+            --text-dark: #333;
+            --bg-light: #f9f9f9;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            color: var(--text-dark);
+        }
+
+        .notification-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+
+        .notification-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .notification-header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .badge {
+            background: white;
+            color: var(--primary-color);
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .btn {
+            background: white;
+            color: var(--primary-color);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: rgba(255,255,255,0.9);
+            transform: translateY(-2px);
+        }
+
+        .notification-list {
+            padding: 1rem;
+        }
+
+        .notification-item {
+            padding: 1.5rem;
+            margin: 0.5rem 0;
+            border-radius: 8px;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            transition: all 0.3s;
+            cursor: pointer;
+            border-left: 4px solid transparent;
+        }
+
+        .notification-item:hover {
+            background: var(--bg-light);
+            transform: translateX(4px);
+        }
+
+        .notification-item.unread {
+            background: var(--text-light);
+            border-left-color: var(--primary-light);
+        }
+
+        .notification-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .notification-icon.accepted {
+            background: rgba(76, 175, 80, 0.1);
+            color: var(--success-color);
+        }
+
+        .notification-icon.rejected {
+            background: rgba(244, 67, 54, 0.1);
+            color: var(--danger-color);
+        }
+
+        .notification-icon.pending {
+            background: rgba(255, 152, 0, 0.1);
+            color: var(--warning-color);
+        }
+
+        .notification-content {
+            flex-grow: 1;
+        }
+
+        .notification-title {
+            font-weight: 600;
+            margin: 0 0 0.5rem 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .notification-message {
+            margin: 0;
+            color: #666;
+        }
+
+        .notification-time {
+            color: #999;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .notification-status {
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-accepted {
+            background: rgba(76, 175, 80, 0.1);
+            color: var(--success-color);
+        }
+
+        .status-rejected {
+            background: rgba(244, 67, 54, 0.1);
+            color: var(--danger-color);
+        }
+
+        .status-pending {
+            background: rgba(255, 152, 0, 0.1);
+            color: var(--warning-color);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #999;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #ddd;
+        }
+
+        .test-data-banner {
+            background: var(--warning-color);
+            color: white;
+            padding: 0.5rem;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+<div class="notification-container">
+    <div class="notification-header">
+        <h1>
+            <i class="fas fa-bell"></i>
+            Notifications
+            <span class="badge" id="unread-count">0</span>
+        </h1>
+        <button id="mark-all-read" class="btn">
+            <i class="fas fa-check-double"></i> Mark All as Read
+        </button>
+    </div>
+
+    <div class="notification-list" id="notification-list">
+        <div class="empty-state">
+            <i class="fas fa-bell-slash"></i>
+            <p>Loading notifications...</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        loadNotifications();
+        document.getElementById('mark-all-read')?.addEventListener('click', markAllAsRead);
+    });
+
+    async function loadNotifications() {
+        try {
+            const response = await fetch('/notifications', {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json'
+                },
+                credentials: 'include'
+            });
+
+            if (response.status === 401) {
+                window.location.href = '/login.html';
+                return;
+            }
+
+            if (!response.ok) {
+                throw new Error(`Failed to load notifications: ${response.status}`);
+            }
+
+            const data = await response.json();
+            if (!data.notifications) throw new Error("Invalid response format");
+
+            renderNotifications(data.notifications);
+            updateUnreadCount(data.unreadCount || 0);
+
+        } catch (error) {
+            console.error('Error loading notifications:', error);
+            showErrorMessage(error.message || 'Failed to load notifications');
+        }
+    }
+
+    function renderNotifications(notifications) {
+        const container = document.getElementById('notification-list');
+
+        if (!notifications || notifications.length === 0) {
+            container.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-bell-slash"></i>
+                    <p>No notifications yet</p>
+                </div>
+            `;
+            return;
+        }
+
+        container.innerHTML = '';
+
+        notifications.forEach(notification => {
+            const notificationEl = document.createElement('div');
+            notificationEl.className = `notification-item ${notification.read ? '' : 'unread'}`;
+            notificationEl.dataset.id = notification.notificationId;
+
+            // Determine icon and status based on notification type
+            let iconClass = 'pending';
+            let statusClass = 'status-pending';
+            let icon = 'fa-clock';
+            let statusText = 'Pending';
+
+            if (notification.type === 'APPOINTMENT' && notification.title.includes('Cancelled')) {
+                iconClass = 'rejected';
+                statusClass = 'status-rejected';
+                icon = 'fa-times-circle';
+                statusText = 'Cancelled';
+            }
+
+            notificationEl.innerHTML = `
+                <div class="notification-icon ${iconClass}">
+                    <i class="fas ${icon}"></i>
+                </div>
+                <div class="notification-content">
+                    <div class="notification-title">
+                        <span>${notification.title}</span>
+                        <span class="notification-status ${statusClass}">${statusText}</span>
+                    </div>
+                    <p class="notification-message">${notification.message}</p>
+                    <div class="notification-time">
+                        <i class="far fa-clock"></i>
+                        ${new Date(notification.createdAt).toLocaleString()}
+                    </div>
+                </div>
+            `;
+
+            notificationEl.addEventListener('click', function() {
+                if (this.classList.contains('unread')) {
+                    markAsRead(notification.notificationId);
+                    this.classList.remove('unread');
+                    updateUnreadCount(parseInt(document.getElementById('unread-count').textContent) - 1);
+                }
+            });
+
+            container.appendChild(notificationEl);
+        });
+    }
+
+    async function markAsRead(notificationId) {
+        try {
+            const response = await fetch('/notifications/mark-read', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ id: notificationId }),
+                credentials: 'include'
+            });
+
+            if (response.status === 401) {
+                window.location.href = '/login.html';
+                return;
+            }
+
+            if (!response.ok) {
+                throw new Error('Failed to mark as read');
+            }
+        } catch (error) {
+            console.error('Error marking notification as read:', error);
+            showErrorMessage('Failed to mark notification as read');
+        }
+    }
+
+    async function markAllAsRead() {
+        try {
+            const response = await fetch('/notifications/mark-all-read', {
+                method: 'POST',
+                credentials: 'include'
+            });
+
+            if (response.status === 401) {
+                window.location.href = '/login.html';
+                return;
+            }
+
+            if (response.ok) {
+                document.querySelectorAll('.notification-item').forEach(item => {
+                    item.classList.remove('unread');
+                });
+                document.getElementById('unread-count').textContent = '0';
+            }
+        } catch (error) {
+            console.error('Error marking all as read:', error);
+            showErrorMessage('Failed to mark all notifications as read');
+        }
+    }
+
+    function updateUnreadCount(count) {
+        const badge = document.getElementById('unread-count');
+        if (count > 0) {
+            badge.textContent = count;
+            badge.style.display = 'inline-flex';
+        } else {
+            badge.style.display = 'none';
+        }
+    }
+
+    function showErrorMessage(message) {
+        const container = document.getElementById('notification-list');
+        container.innerHTML = `
+            <div class="empty-state">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>${message}</p>
+                <button onclick="loadNotifications()" class="btn" style="margin-top: 1rem;">
+                    <i class="fas fa-sync-alt"></i> Retry
+                </button>
+            </div>
+        `;
+    }
+
+    // Poll for new notifications every 30 seconds
+    setInterval(loadNotifications, 30000);
+</script>
+</body>
+</html>

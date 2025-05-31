@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Select Salon - GlowUp</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="booking-container">
+    <h1>Select a Salon</h1>
+
+    <div class="salon-list">
+        <!-- Dynamically populated from backend -->
+        <c:forEach var="salon" items="${salons}">
+            <div class="salon-card">
+                <h3>${salon.name}</h3>
+                <p>${salon.address}</p>
+                <a href="../booking/book.html?salonId=${salon.salon_id}" class="btn btn-primary">Select</a>
+            </div>
+        </c:forEach>
+    </div>
+</div>
+</body>
+</html>

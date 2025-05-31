@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Salon Services - GlowUp</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        .form-container {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            border: 1px solid #ddd;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 80px;
+            resize: vertical;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 5px;
+        }
+
+        .btn-edit {
+            background-color: #2196F3;
+        }
+
+        .btn-edit:hover {
+            background-color: #0b7dda;
+        }
+
+        .btn-delete {
+            background-color: #f44336;
+        }
+
+        .btn-delete:hover {
+            background-color: #da190b;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 5px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: black;
+        }
+
+        .error-message {
+            color: #f44336;
+            margin-top: 5px;
+            font-size: 0.9em;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(0,0,0,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Manage Salon Services</h1>
+
+    <!-- Add New Service Form -->
+    <div class="form-container">
+        <h2>Add New Service</h2>
+        <form id="addServiceForm">
+            <input type="hidden" name="action" value="add">
+
+            <div class="form-group">
+                <label for="name">Service Name:</label>
+                <input type="text" id="name" name="name" required>
+                <div class="error-message" id="name-error"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea id="description" name="description"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="category">Category:</label>
+                <select id="category" name="category" required>
+                    <option value="hair">Hair</option>
+                    <option value="nails">Nails</option>
+                    <option value="spa">Spa</option>
+                    <option value="barber">Barber</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="duration">Duration (minutes):</label>
+                <input type="number" id="duration" name="duration" required min="5">
+                <div class="error-message" id="duration-error"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="price">Price ($):</label>
+                <input type="number" id="price" name="price" step="0.01" required min="0">
+                <div class="error-message" id="price-error"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" required>
+                    <option value="men">Men</option>
+                    <option value="women">Women</option>
+                    <option value="unisex" selected>Unisex</option>
+                </select>
+            </div>
+
+            <button type="submit" id="addServiceBtn">Add Service</button>
+            <span id="addLoading" style="display:none;"></span>
+        </form>
+    </div>
+
+    <!-- Current Services Table -->
+    <h2>Current Services</h2>
+    <div id="loadingServices" style="text-align: center; padding: 20px;">
+        <div class="loading"></div> Loading services...
+    </div>
+    <table id="servicesTable" style="display: none;">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Duration</th>
+            <th>Price</th>
+            <th>Gender</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody id="servicesTableBody">
+        <!-- Services will be loaded here by JavaScript -->
+        </tbody>
+    </table>
+
+    <!-- Edit Service Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Edit Service</h2>
+            <form id="editServiceForm">
+                <input type="hidden" name="action" value="edit">
+                <input type="hidden" id="editServiceId" name="service_id">
+
+                <div class="form-group">
+                    <label for="editName">Service Name:</label>
+                    <input type="text" id="editName" name="name" required>
+                    <div class="error-message" id="edit-name-error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="editDescription">Description:</label>
+                    <textarea id="editDescription" name="description"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="editCategory">Category:</label>
+                    <select id="editCategory" name="category" required>
+                        <option value="hair">Hair</option>
+                        <option value="nails">Nails</option>
+                        <option value="spa">Spa</option>
+                        <option value="barber">Barber</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="editDuration">Duration (minutes):</label>
+                    <input type="number" id="editDuration" name="duration" required min="5">
+                    <div class="error-message" id="edit-duration-error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="editPrice">Price ($):</label>
+                    <input type="number" id="editPrice" name="price" step="0.01" required min="0">
+                    <div class="error-message" id="edit-price-error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="editGender">Gender:</label>
+                    <select id="editGender" name="gender" required>
+                        <option value="men">Men</option>
+                        <option value="women">Women</option>
+                        <option value="unisex">Unisex</option>
+                    </select>
+                </div>
+
+                <button type="submit" id="saveEditBtn">Save Changes</button>
+                <span id="editLoading" style="display:none;"></span>
+                <button type="button" class="btn-delete" onclick="closeModal()">Cancel</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    // DOM elements
+    const servicesTable = document.getElementById('servicesTable');
+    const servicesTableBody = document.getElementById('servicesTableBody');
+    const loadingServices = document.getElementById('loadingServices');
+    const editModal = document.getElementById('editModal');
+    const addForm = document.getElementById('addServiceForm');
+    const editForm = document.getElementById('editServiceForm');
+    const addServiceBtn = document.getElementById('addServiceBtn');
+    const saveEditBtn = document.getElementById('saveEditBtn');
+    const addLoading = document.getElementById('addLoading');
+    const editLoading = document.getElementById('editLoading');
+
+    // Initialize when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        loadServices();
+
+        // Form submission handlers
+        addForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            addNewService();
+        });
+
+        editForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            saveEditedService();
+        });
+    });
+
+    // Load services from server
+    function loadServices() {
+        fetch('/manage-services', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json'
+            },
+            credentials: 'include'
+        })
+            .then(response => {
+                if (response.status === 401) {
+                    window.location.href = '/login.html';
+                    return Promise.reject('Unauthorized');
+                }
+                if (!response.ok) {
+                    return Promise.reject('Failed to load services');
+                }
+                return response.json();
+            })
+            .then(services => {
+                renderServices(services);
+                loadingServices.style.display = 'none';
+                servicesTable.style.display = 'table';
+            })
+            .catch(error => {
+                console.error('Error loading services:', error);
+                loadingServices.innerHTML = '<p style="color: #f44336;">Error loading services. Please try again.</p>';
+            });
+    }
+
+    // Render services in the table
+    function renderServices(services) {
+        servicesTableBody.innerHTML = '';
+
+        if (!services || services.length === 0) {
+            servicesTableBody.innerHTML = '<tr><td colspan="7" style="text-align: center;">No services found</td></tr>';
+            return;
+        }
+
+        services.forEach(service => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+            <td>${service.name}</td>
+            <td>${service.description || ''}</td>
+            <td>${service.category}</td>
+            <td>${service.duration_minutes} mins</td>
+            <td>$${service.price.toFixed(2)}</td>
+            <td>${service.gender}</td>
+            <td class="action-btns">
+                <button class="btn-edit" onclick="openEditModal(${service.service_id})">Edit</button>
+                <button class="btn-delete" onclick="deleteService(${service.service_id})">Delete</button>
+            </td>
+        `;
+            servicesTableBody.appendChild(row);
+        });
+    }
+
+    // Add new service
+    function addNewService() {
+        const formData = new FormData(addForm);
+        const data = Object.fromEntries(formData.entries());
+
+        if (!validateServiceData(data)) {
+            return;
+        }
+
+        addServiceBtn.disabled = true;
+        addLoading.style.display = 'inline-block';
+
+        fetch('/manage-services', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams(data),
+            credentials: 'include'
+        })
+            .then(response => {
+                if (response.status === 401) {
+                    window.location.href = '/login.html';
+                    return Promise.reject('Unauthorized');
+                }
+                return response.json();
+            })
+            .then(result => {
+                if (result.success) {
+                    addForm.reset();
+                    loadServices();
+                    alert('Service added successfully!');
+                } else {
+                    throw new Error(result.message || 'Failed to add service');
+                }
+            })
+            .catch(error => {
+                console.error('Error adding service:', error);
+                alert('Error: ' + (error.message || 'Failed to add service'));
+            })
+            .finally(() => {
+                addServiceBtn.disabled = false;
+                addLoading.style.display = 'none';
+            });
+    }
+
+    // Open edit modal with service data
+    function openEditModal(serviceId) {
+        fetch(`/manage-services?serviceId=${serviceId}`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json'
+            },
+            credentials: 'include'
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to load service details');
+                }
+                return response.json();
+            })
+            .then(service => {
+                document.getElementById('editServiceId').value = service.service_id;
+                document.getElementById('editName').value = service.name;
+                document.getElementById('editDescription').value = service.description || '';
+                document.getElementById('editCategory').value = service.category;
+                document.getElementById('editDuration').value = service.duration_minutes;
+                document.getElementById('editPrice').value = service.price;
+                document.getElementById('editGender').value = service.gender;
+
+                editModal.style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error loading service details:', error);
+                alert('Failed to load service details');
+            });
+    }
+
+    // Save edited service
+    function saveEditedService() {
+        const formData = new FormData(editForm);
+        const data = Object.fromEntries(formData.entries());
+
+        if (!validateServiceData(data, true)) {
+            return;
+        }
+
+        saveEditBtn.disabled = true;
+        editLoading.style.display = 'inline-block';
+
+        fetch('/manage-services', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams(data),
+            credentials: 'include'
+        })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(err => { throw err; });
+                }
+                return response.json();
+            })
+            .then(result => {
+                if (result.success) {
+                    closeModal();
+                    loadServices();
+                    alert('Service updated successfully!');
+                } else {
+                    throw new Error(result.message || 'Failed to update service');
+                }
+            })
+            .catch(error => {
+                console.error('Error updating service:', error);
+                alert('Error: ' + (error.message || 'Failed to update service'));
+            })
+            .finally(() => {
+                saveEditBtn.disabled = false;
+                editLoading.style.display = 'none';
+            });
+    }
+
+    // Delete service
+    function deleteService(serviceId) {
+        if (!confirm('Are you sure you want to delete this service?')) {
+            return;
+        }
+
+        fetch('/manage-services', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `action=delete&service_id=${serviceId}`,
+            credentials: 'include'
+        })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(err => { throw err; });
+                }
+                return response.json();
+            })
+            .then(result => {
+                if (result.success) {
+                    loadServices();
+                    alert('Service deleted successfully!');
+                } else {
+                    throw new Error(result.message || 'Failed to delete service');
+                }
+            })
+            .catch(error => {
+                console.error('Error deleting service:', error);
+                alert('Error: ' + (error.message || 'Failed to delete service'));
+            });
+    }
+
+    // Close modal
+    function closeModal() {
+        editModal.style.display = 'none';
+        // Clear any error messages
+        document.getElementById('edit-name-error').textContent = '';
+        document.getElementById('edit-duration-error').textContent = '';
+        document.getElementById('edit-price-error').textContent = '';
+    }
+
+    // Validate service data
+    function validateServiceData(data, isEdit = false) {
+        let isValid = true;
+
+        // Clear previous errors
+        document.getElementById(isEdit ? 'edit-name-error' : 'name-error').textContent = '';
+        document.getElementById(isEdit ? 'edit-duration-error' : 'duration-error').textContent = '';
+        document.getElementById(isEdit ? 'edit-price-error' : 'price-error').textContent = '';
+
+        // Validate name
+        if (!data.name || data.name.trim().length < 2) {
+            document.getElementById(isEdit ? 'edit-name-error' : 'name-error').textContent =
+                'Service name must be at least 2 characters';
+            isValid = false;
+        }
+
+        // Validate duration
+        if (!data.duration || isNaN(data.duration) || parseInt(data.duration) < 5) {
+            document.getElementById(isEdit ? 'edit-duration-error' : 'duration-error').textContent =
+                'Duration must be at least 5 minutes';
+            isValid = false;
+        }
+
+        // Validate price
+        if (!data.price || isNaN(data.price) || parseFloat(data.price) <= 0) {
+            document.getElementById(isEdit ? 'edit-price-error' : 'price-error').textContent =
+                'Price must be a positive number';
+            isValid = false;
+        }
+
+        return isValid;
+    }
+</script>
+</body>
+</html>

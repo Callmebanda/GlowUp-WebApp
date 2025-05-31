@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Salon List</title>
+    <style>
+        :root {
+            --primary-color: #6a11cb; /* Purple left */
+            --secondary-color: #2575fc; /* Purple-blue right */
+            --accent-color: #6a11cb;
+            --highlight-color: #ffb6b6;
+            --light-background: #f5f7fa;
+            --dark-background: #222222;
+            --white: #ffffff;
+            --text-color: #222222;
+            --light-text: #777777;
+            --border-color: #e0e0e0;
+            --black: #000000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            background: var(--light-background);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: var(--white);
+            color: #6a11cb;
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        main {
+            flex: 1;
+            padding: 40px;
+        }
+
+        #salon-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .salon {
+            background: white;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .salon:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .salon h3 {
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .salon ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .salon ul li {
+            margin-bottom: 8px;
+        }
+
+        .service-link {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .service-link:hover {
+            color: var(--accent-color);
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo h1 {
+            color: var(--primary-color);
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .main-nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .auth-buttons {
+            background-color: #ccc;
+            padding: 6px 16px;
+            border-radius: 999px;
+            font-size: 13px;
+            color: white;
+            font-weight: 500;
+        }
+
+        .auth-buttons a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .auth-buttons a:hover {
+            text-decoration: underline;
+        }
+
+        .footer {
+            background-color: #1e1e1e;
+            color: #fff;
+            padding: 40px 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-section {
+            flex: 1 1 300px;
+            margin: 10px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .footer-section p,
+        .footer-section li,
+        .footer-section a {
+            font-size: 14px;
+            color: #ccc;
+            line-height: 1.6;
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            color: #a855f7; /* Purple hover */
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section li {
+            margin-bottom: 8px;
+        }
+
+        .footer-section i {
+            margin-right: 8px;
+        }
+
+        .footer hr {
+            border: none;
+            border-top: 1px solid #444;
+            margin: 30px 0;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            color: #ccc;
+            font-size: 14px;
+        }
+
+        .social-icons i {
+            margin-left: 15px;
+            font-size: 18px;
+            color: #ccc;
+            cursor: pointer;
+        }
+
+        .social-icons i:hover {
+            color: #a855f7;
+        }
+
+
+    </style>
+
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>GlowUp</h1>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="Salon%20Listing.html">Salons</a></li>
+                    <li><a href="Services.html">Services</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <div class="user-greeting" id="userGreeting">
+                    Welcome! <a href="login.html">Sign In</a> or <a href="register.html">Join Free</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+
+<main>
+    <h1 style="margin-bottom: 30px;">Available Salons</h1>
+
+    <div id="salon-list"></div>
+</main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>GlowUp</h3>
+                <p>Your premier salon booking platform connecting customers with the best beauty professionals.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="Salon%20Listing.html">Salons</a></li>
+                    <li><a href="Services.html">Services</a></li>
+                    <li><a href="About.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p><i class="fas fa-envelope"></i> info@glowup.com</p>
+                <p><i class="fas fa-phone-alt"></i> +1 (555) 123-4567</p>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Beauty St, Glamour City</p>
+            </div>
+        </div>
+        <hr>
+        <div class="footer-bottom">
+            <p>© 2023 GlowUp. All rights reserved.</p>
+            <div class="social-icons">
+                <i class="fab fa-facebook-f"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-twitter"></i>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Font Awesome CDN for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+<script>
+    const salonsData = [
+        {
+            salon_name: "Luxury Hair Studio",
+            services: [
+                { name: "Haircut", price: "P25.00" },
+                { name: "Hair Coloring", price: "P50.00" },
+                { name: "Styling", price: "P30.00" }
+            ]
+        },
+        {
+            salon_name: "Shiny Nails",
+            services: [
+                { name: "Manicure", price: "P20.00" },
+                { name: "Pedicure", price: "P30.00" },
+                { name: "Nail Art", price: "P40.00" }
+            ]
+        },
+        {
+            salon_name: "Gentleman's Barbershop",
+            services: [
+                { name: "Men's Haircut", price: "P15.00" },
+                { name: "Beard Trim", price: "P5.00" },
+                { name: "Shaving", price: "P12.00" }
+            ]
+        },
+        {
+            salon_name: "Beauty Bliss",
+            services: [
+                { name: "Facial", price: "P35.00" },
+                { name: "Makeup", price: "P60.00" },
+                { name: "Waxing", price: "P20.00" }
+            ]
+        }
+    ];
+
+    function showDetails() {
+        const salonList = document.getElementById('salon-list');
+        salonList.innerHTML = '';
+
+        salonsData.forEach(salon => {
+            const salonDiv = document.createElement('div');
+            salonDiv.classList.add('salon');
+
+            let servicesList = salon.services.map(service => `
+                <li>
+                    <a href="#" class="service-link"
+                       onclick="bookNow('${salon.salon_name}', '${service.name}', '${service.price}')">
+                        ${service.name} (${service.price})
+                    </a>
+                </li>
+            `).join('');
+
+            salonDiv.innerHTML = `
+                <h3>${salon.salon_name}</h3>
+                <ul>${servicesList}</ul>
+            `;
+
+            salonList.appendChild(salonDiv);
+        });
+    }
+
+    function bookNow(salon, service, price) {
+        localStorage.setItem('selectedSalon', salon);
+        localStorage.setItem('selectedService', service);
+        localStorage.setItem('selectedPrice', price);
+        window.location.href = 'booking.html'; // Go to booking page
+    }
+
+    window.onload = showDetails;
+</script>
+
+</body>
+</html>
